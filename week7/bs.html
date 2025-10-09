@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Bazaar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ece9e6, #ffffff);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #4a90e2;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 4px solid #357ab7;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .book-list, .cart {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    .book-list h2, .cart h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .book {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px dashed #ddd;
+    }
+
+    .book:last-child {
+      border-bottom: none;
+    }
+
+    .book button {
+      background: #4a90e2;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .book button:hover {
+      background: #357ab7;
+      transform: scale(1.05);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+    }
+
+    .cart-total {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-align: right;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #f1f1f1;
+      font-size: 0.9rem;
+      margin-top: 30px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📖 Book Bazaar</h1>
+    <p>Discover. Add. Enjoy Reading.</p>
+  </header>
+
+  <main>
+    <div class="book-list" id="bookList">
+      <h2>Available Books</h2>
+      <!-- Books will be displayed here -->
+    </div>
+    
+    <div class="cart">
+      <h2>🛒 Your Cart</h2>
+      <div id="cartItems"></div>
+      <div class="cart-total" id="cartTotal">Total: ₹0</div>
+    </div>
+  </main>
+
+
+  <script>
+    const books = [
+      { id: 1, title: "Atomic Habits", price: 499 },
+      { id: 2, title: "The Alchemist", price: 299 },
+      { id: 3, title: "Rich Dad Poor Dad", price: 399 }
+    ];
+
+    const bookList = document.getElementById("bookList");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+
+    let cart = [];
+    function displayBooks() {
+      books.forEach(book => {
+        const div = document.createElement("div");
+        div.classList.add("book");
+        div.innerHTML = `
+          <span>${book.title} - ₹${book.price}</span>
+          <button onclick="addToCart(${book.id})">Add to Cart</button>
+        `;
+        bookList.appendChild(div);
+      });
+    }
+    function addToCart(bookId) {
+      const book = books.find(b => b.id === bookId);
+      cart.push(book);
+      updateCartUI();
+    }
+    function updateCartUI() {
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          <span>${item.title}</span>
+          <span>₹${item.price}</span>
+        `;
+        cartItems.appendChild(div);
+      });
+      cartTotal.textContent = "Total: ₹" + total;
+    }
+    displayBooks();
+  </script>
+</body>
+</html>
