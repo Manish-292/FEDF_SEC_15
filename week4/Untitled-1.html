@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: #ffffffcc;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    input {
+      display: block;
+      width: 220px;
+      padding: 10px;
+      margin: 12px 0;
+      border: 3px solid #767373;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    input[type="submit"] {
+      background: #6a5acd;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    input[type="submit"]:hover {
+      background: #483d8b;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <form>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+</body>
+</html>
